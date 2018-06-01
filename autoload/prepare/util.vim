@@ -22,3 +22,8 @@ function! prepare#util#set_cursor_position(row_num)
     call setpos(".", pos)
 endfunction
 
+" 获取当前文件后缀名
+function! prepare#util#get_current_file_suffix()
+    return expand("%:e")
+endfunction
+
