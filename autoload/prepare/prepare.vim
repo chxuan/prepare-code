@@ -8,16 +8,20 @@
 " 生成预定于代码
 function! prepare#prepare#gen_prepare_code()
     let suffix = prepare#util#get_current_file_suffix()
+    call <sid>gen_prepare_code_by_suffix(suffix)
+endfunction
 
-    if suffix == "sh"
+" 根据后缀名生成代码
+function! s:gen_prepare_code_by_suffix(suffix)
+    if a:suffix == "sh"
         call <sid>gen_bash_code()
-    elseif suffix == "py"
+    elseif a:suffix == "py"
         call <sid>gen_python_code()
-    elseif suffix == "c"
+    elseif a:suffix == "c"
         call <sid>gen_c_code()
-    elseif suffix == "h" || suffix == "hpp"
+    elseif a:suffix == "h" || a:suffix == "hpp"
         call <sid>gen_cpp_header_code()
-    elseif suffix == "cpp" || suffix == "cc"
+    elseif a:suffix == "cpp" || a:suffix == "cc"
         call <sid>gen_cpp_implement_code()
     endif
 endfunction
