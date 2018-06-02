@@ -24,30 +24,39 @@ endfunction
 
 " 生成bash代码
 function! s:gen_bash_code()
-    call prepare#util#write_text_at_current_row("#!/bin/bash\n")
+    let lines = <sid>get_prepare_code("sh")
+    call prepare#util#write_texts(lines)
 endfunction
 
 " 生成python代码
 function! s:gen_python_code()
-    call prepare#util#write_text_at_current_row("#!/usr/bin/env python\n# coding=utf-8\n")
+    let lines = <sid>get_prepare_code("py")
+    call prepare#util#write_texts(lines)
 endfunction
 
 " 生成c代码
 function! s:gen_c_code()
-    call prepare#util#write_text_at_current_row("#include <stdio.h>\n\nint main()\n{\nprintf(\"Hello world\\n\");\nreturn 0;\n}\n")
-    call prepare#util#set_cursor_position(5)
+    let lines = <sid>get_prepare_code("c")
+    call prepare#util#write_texts(lines)
 endfunction
 
 " 生成cpp头文件代码
 function! s:gen_cpp_header_code()
-    let class_name = prepare#util#get_current_file_base_name()
-    call prepare#util#write_text_at_current_row("#pragma once\n\nclass " . class_name . "\n{\npublic:\n" . class_name . "() {}\n~" . class_name . "() {}\n\nprivate:\n\n};")
-    call prepare#util#set_cursor_position(6)
+    let lines = <sid>get_prepare_code("h")
+    let target = prepare#util#get_current_file_base_name()
+    let texts = prepare#util#replace_texts(lines, "snippet", target)
+    call prepare#util#write_texts(texts)
 endfunction
 
 " 生成cpp实现代码
 function! s:gen_cpp_implement_code()
-    call prepare#util#write_text_at_current_row("#include <iostream>\n\nint main()\n{\nstd::cout << \"Hello world\" << std::endl;\nreturn 0;\n}\n")
-    call prepare#util#set_cursor_position(5)
+    let lines = <sid>get_prepare_code("cpp")
+    call prepare#util#write_texts(lines)
+endfunction
+
+" 获取代码片段
+function! s:get_prepare_code(suffix)
+    let file_path = g:prepare_code_plugin_path . "/snippet/snippet." . a:suffix
+    return prepare#util#read_file(file_path)
 endfunction
 
