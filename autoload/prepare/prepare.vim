@@ -19,11 +19,19 @@ function! s:gen_prepare_code_by_suffix(suffix)
         call <sid>gen_python_code()
     elseif a:suffix == "c"
         call <sid>gen_c_code()
+    elseif a:suffix == "go"
+        call <sid>gen_Go_code()
     elseif a:suffix == "h" || a:suffix == "hpp"
         call <sid>gen_cpp_header_code()
     elseif a:suffix == "cpp" || a:suffix == "cc"
         call <sid>gen_cpp_implement_code()
     endif
+endfunction
+
+" 生成Go代码
+function! s:gen_Go_code()
+    let lines = <sid>get_prepare_code("go")
+    call prepare#util#write_texts(lines)
 endfunction
 
 " 生成bash代码
