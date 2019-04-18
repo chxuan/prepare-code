@@ -57,6 +57,7 @@ function! s:gen_cpp_header_code()
     let lines = <sid>get_prepare_code("h")
     let target = prepare#util#get_current_file_base_name()
     let texts = prepare#util#replace_texts(lines, "snippet", target)
+    let texts = prepare#util#replace_texts(texts, "SNIPPET", toupper(target))
     call prepare#util#write_texts(texts)
 endfunction
 

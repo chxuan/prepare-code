@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __SNIPPET_H__
+#define __SNIPPET_H__
 
 class snippet
 {
@@ -9,3 +10,4 @@ public:
 private:
 
 };
+#endif

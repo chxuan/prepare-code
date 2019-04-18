@@ -35,7 +35,8 @@ endfunction
 
 " 替换字符串
 function! prepare#util#replace_string(str, src, target)
-    return substitute(a:str, a:src, a:target, "g")
+    let noic = '\C' . a:src
+    return substitute(a:str, noic, a:target, "g")
 endfunction
 
 " 替换文本
