@@ -25,6 +25,7 @@ prepare-code: A generate prepare code plugin for vim
 - python
 - bash
 - Go
+- Verilog
 
 
 ## License
