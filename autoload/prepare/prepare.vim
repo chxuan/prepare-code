@@ -73,7 +73,7 @@ function! s:gen_verilog_code()
     let lines = <sid>get_prepare_code("v")
     let target = prepare#util#get_current_file_base_name()
     let texts = prepare#util#replace_texts(lines, "moduleName", target)
-    call prepare#util#write_texts(lines)
+    call prepare#util#write_texts(texts)
 endfunction
 
 " 获取代码片段
