@@ -25,6 +25,8 @@ function! s:gen_prepare_code_by_suffix(suffix)
         call <sid>gen_cpp_header_code()
     elseif a:suffix == "cpp" || a:suffix == "cc"
         call <sid>gen_cpp_implement_code()
+    elseif a:suffix == "v" || a:suffix == "sv"
+        call <sid>gen_verilog_code()
     endif
 endfunction
 
@@ -66,9 +68,16 @@ function! s:gen_cpp_implement_code()
     call prepare#util#write_texts(lines)
 endfunction
 
+" 生成verilog实现代码
+function! s:gen_verilog_code()
+    let lines = <sid>get_prepare_code("v")
+    let target = prepare#util#get_current_file_base_name()
+    let texts = prepare#util#replace_texts(lines, "moduleName", target)
+    call prepare#util#write_texts(texts)
+endfunction
+
 " 获取代码片段
 function! s:get_prepare_code(suffix)
     let file_path = g:prepare_code_plugin_path . "/snippet/snippet." . a:suffix
     return prepare#util#read_file(file_path)
 endfunction
-
