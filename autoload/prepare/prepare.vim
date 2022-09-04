@@ -25,7 +25,7 @@ function! s:gen_prepare_code_by_suffix(suffix)
         call <sid>gen_cpp_header_code()
     elseif a:suffix == "cpp" || a:suffix == "cc"
         call <sid>gen_cpp_implement_code()
-    elseif a:suffix == "v"
+    elseif a:suffix == "v" || a:suffix == "sv"
         call <sid>gen_verilog_code()
     endif
 endfunction
